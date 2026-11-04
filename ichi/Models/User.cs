@@ -1,4 +1,6 @@
-﻿namespace ichi.Models
+﻿using ichi.Exeptions;
+
+namespace ichi.Models
 {
     internal class User
     {
@@ -13,7 +15,10 @@
             {
                 if (!value.Contains("@"))
                 {
-                    Console.WriteLine("email invalid");
+                    //Console.WriteLine("email invalid");
+                    //throw new Exception("Email invalid");
+                    throw new InvalidEmailExeption("Email invalid");
+
                 }
                 _email = value;
             }

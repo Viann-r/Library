@@ -3,24 +3,26 @@ using ichi.Services;
 
 namespace ichi.Menu
 {
-    internal class Menu
+    internal class UserMenu
     {
         private readonly UserService _userService;
-        public Menu(UserService userService)
+        public UserMenu(UserService userService)
         {
             _userService = userService;
         }
 
-        public void ShowMenu()
+        public void ShowMainMenu()
         {
+            Console.WriteLine("Welcome to the user managment system!");
 
-            Console.WriteLine("Welcome to user Management Systeme");
-            Console.WriteLine("1. Register");
-            Console.WriteLine("2. Login");
-            Console.WriteLine("0. Exit");
-            var choice = Console.ReadLine();
+            string choice = "";
             while (choice != "0")
             {
+                Console.WriteLine("Welcome to user Management Systeme");
+                Console.WriteLine("1. Register");
+                Console.WriteLine("2. Login");
+                Console.WriteLine("0. Exit");
+                choice = Console.ReadLine();
                 switch (choice)
                 {
                     case "1":
@@ -38,6 +40,7 @@ namespace ichi.Menu
                 }
             }
         }
+
         private void ShowRegisterMenu()
         {
             User user = new User();
@@ -47,7 +50,9 @@ namespace ichi.Menu
             user.Email = Console.ReadLine();
             Console.WriteLine("Enter password: ");
             user.Password = Console.ReadLine();
+            _userService.RegisterUser(user);
         }
+
         private void ShowLoginMenu()
         {
             User user = new User();
@@ -56,5 +61,8 @@ namespace ichi.Menu
             Console.WriteLine("Enter password: ");
             user.Password = Console.ReadLine();
         }
+
+
+
     }
 }

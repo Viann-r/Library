@@ -28,17 +28,17 @@ namespace ichi.Repositories
             return users;
         }
 
-        public User? GetUser(string email) { 
-        var user = GetAllUsers().FirstOrDefault(x => x.Email.Equals(email));
-            return user;
-        }
-        public void UpdateUser(User user) {
-            var userExists = GetAllUsers().FindIndex(u => u.Id == user.Id);
-            var users = GetAllUsers();
-            if (userExists == null) Console.WriteLine("user does not exist");
-            users[userExists] = user;
-            File.WriteAllLines(_filePath, users.Select(u => u.ToString()));
-        }
+        //public User? GetUser(string email) { 
+        //var user = GetAllUsers().FirstOrDefault(x => x.Email.Equals(email));
+        //    return user;
+        //}
+        //public void UpdateUser(User user) {
+        //    var userExists = GetAllUsers().FindIndex(u => u.Id == user.Id);
+        //    var users = GetAllUsers();
+        //    if (userExists == null) Console.WriteLine("user does not exist");
+        //    users[userExists] = user;
+        //    File.WriteAllLines(_filePath, users.Select(u => u.ToString()));
+        //}
 
 
 

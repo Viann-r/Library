@@ -26,6 +26,8 @@ namespace ichi.Services
                 return;
             }
 
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
             _userRepository.SaveUser(user);
         }
 
