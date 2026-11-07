@@ -18,7 +18,6 @@ namespace ichi.Menu
             string choice = "";
             while (choice != "0")
             {
-                Console.WriteLine("Welcome to user Management Systeme");
                 Console.WriteLine("1. Register");
                 Console.WriteLine("2. Login");
                 Console.WriteLine("0. Exit");

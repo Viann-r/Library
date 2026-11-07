@@ -4,8 +4,8 @@ namespace ichi.Repositories
 {
     internal class UserRepository
     {
-        private readonly string _filePath = "C:\\Users\\student\\source\\repos\\Library\\ichi\\Data\\user.txt";
-
+        private readonly string _filePath = @"../../../Data/user.txt";
+        //C:\\Users\\student\\source\\repos\\Library\\ichi\\Data\\user.txt
         public void SaveUser(User user)
         {
             File.AppendAllLines(_filePath, [user.ToString()]);
