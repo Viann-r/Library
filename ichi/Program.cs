@@ -11,7 +11,7 @@ namespace ichi
         {
             IConfiguration configuration = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile("C:\\Users\\student\\source\\repos\\Library\\ichi\\appsettings.json", optional: false, reloadOnChange: true)
             .Build();
             UserRepository userRepository = new UserRepository();
             EmailService emailService = new EmailService(configuration);
