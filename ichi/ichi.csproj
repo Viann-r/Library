@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.14" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.14" />
     <PackageReference Include="SmtpServer" Version="11.1.0" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.57.2" />
   </ItemGroup>
 
   <ItemGroup>

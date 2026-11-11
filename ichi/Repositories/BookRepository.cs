@@ -28,19 +28,45 @@ namespace ichi.Repositories
             return books;
         }
 
-        //public void DeleteBook(int Id)
-        //{
-        //    var books = GetAllBooks();
-        //    Book book = new Book();
-        //    book = book.FirstOrDefault();
-        //    var bookToDelete = books.FirstOrDefault(b => b.Id == Id);
-        //    if (bookToDelete != null)
-        //    {
-        //        books.Remove(bookToDelete);
-        //        File.WriteAllLines(_filePath, books.Select(b => b.ToString()));
-        //    }
 
+        public Book GetBookById(int id)
+        {
+            Book book = new Book();
+            var books = GetAllBooks();
+            book = books.FirstOrDefault(x => x.Id == id);
+            return book;
+        }
 
+        public void DeleteBook(int id)
+        {
+            var books = GetAllBooks();
+            Book book = new Book();
+            book = books.FirstOrDefault(x => x.Id == id);
+            books.Remove(book);
+            string[] bookText = new string[books.Count];
+            for (int i = 0; i < books.Count; i++)
+            {
+                bookText[i] = books[i].ToString();
+            }
+            File.WriteAllText(_filePath, string.Empty);
+            File.AppendAllLines(_filePath, bookText);
+        }
+
+        public void UpdateBook(Book book)
+        {
+            var books = GetAllBooks();
+            Book bookToUpdate = new Book();
+            bookToUpdate = books.FirstOrDefault(x => x.Id == book.Id);
+            bookToUpdate.Name = book.Name;
+            bookToUpdate.Description = book.Description;
+            string[] bookText = new string[books.Count];
+            for (int i = 0; i < books.Count; i++)
+            {
+                bookText[i] = books[i].ToString();
+            }
+            File.WriteAllText(_filePath, string.Empty);
+            File.AppendAllLines(_filePath, bookText);
+        }
 
 
 

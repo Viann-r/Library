@@ -32,6 +32,10 @@ namespace ichi.Menu
                         ShowLoginMenu();
                         break;
 
+                    case "3":
+                        ShowVerifyEmailMenu();
+                        break;
+
                     default:
                         Console.WriteLine("Invalid choice. Please try again.");
                         break;
@@ -39,6 +43,17 @@ namespace ichi.Menu
                 }
             }
         }
+
+        private void ShowVerifyEmailMenu()
+        {
+            Console.WriteLine("Enter email:");
+            string email = Console.ReadLine();
+            Console.WriteLine("Enter verification code:");
+            string code = Console.ReadLine();
+            _userService.VerifyUser(email, code);
+        }
+
+
 
         private void ShowRegisterMenu()
         {
@@ -59,6 +74,7 @@ namespace ichi.Menu
             user.Email = Console.ReadLine();
             Console.WriteLine("Enter password: ");
             user.Password = Console.ReadLine();
+            _userService.LoginUser(user.Email, user.Password);
         }
 
 

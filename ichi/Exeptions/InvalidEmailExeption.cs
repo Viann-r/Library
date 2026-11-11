@@ -2,7 +2,7 @@
 {
     internal class InvalidEmailExeption : Exception
     {
-        public InvalidEmailExeption()
+        public InvalidEmailExeption() : base("invalid email address.")
         {
 
         }

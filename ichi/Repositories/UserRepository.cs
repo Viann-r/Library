@@ -1,4 +1,5 @@
-﻿using ichi.Models;
+﻿using ichi.Exeptions;
+using ichi.Models;
 
 namespace ichi.Repositories
 {
@@ -40,6 +41,48 @@ namespace ichi.Repositories
         //    File.WriteAllLines(_filePath, users.Select(u => u.ToString()));
         //}
 
+
+        public void ChangeFile(List<string> usersInString)
+        {
+            File.WriteAllText(_filePath, "");
+            File.AppendAllLines(_filePath, usersInString);
+        }
+        public User GetUserByEmail(string email)
+        {
+            var users = GetAllUsers();
+            var user = users.FirstOrDefault(x => x.Email == email);
+            return user;
+        }
+
+
+        public void VerifyUser(string email, string verificationCode)
+        {
+            var users = GetAllUsers();
+            var user = users.FirstOrDefault(x => x.Email == email);
+            if (user == null)
+            {
+                throw new UserNotFoundException("User not found");
+                //Console.WriteLine("User not found");
+            }
+            if (user.VerificationCode == verificationCode)
+            {
+                Console.WriteLine("user verified");
+                user.IsVerified = true;
+                string[] userText = new string[users.Count];
+                for (int i = 0; i < users.Count; i++)
+                {
+                    users[i].IsVerified = true;
+                    userText[i] = users[i].ToString();
+                }
+                File.WriteAllText(_filePath, string.Empty);
+                File.AppendAllLines(_filePath, userText);
+            }
+            else
+            {
+                //Console.WriteLine("Verification code is not correct");
+                throw new InvalidVerificationCodeException();
+            }
+        }
 
 
     }

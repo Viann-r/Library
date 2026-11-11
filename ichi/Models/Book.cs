@@ -8,7 +8,7 @@
 
         public override string? ToString()
         {
-            return base.ToString();
+            return $"{Id}|{Name}|{Description}";
         }
     }
 }
