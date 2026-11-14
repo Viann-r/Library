@@ -24,6 +24,8 @@ namespace ichi.Repositories
                 user.Email = line[2];
                 user.Password = line[3];
                 user.IsLogged = bool.Parse(line[4]);
+                user.VerificationCode = line[5];
+                user.IsVerified = bool.Parse(line[6]);
                 users.Add(user);
             }
             return users;

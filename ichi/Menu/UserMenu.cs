@@ -26,19 +26,19 @@ namespace ichi.Menu
 
                 choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("1. Register, 2. Login, 3. Verify Email, 0. Exit")
-                .AddChoices("1", "2", "3", "0"));
+                .AddChoices("1. Register", "2. Login", "3. Verify Email", "0. Exit"));
                 //choice = Console.ReadLine();
                 switch (choice)
                 {
-                    case "1":
+                    case "1. Register":
                         ShowRegisterMenu();
                         break;
 
-                    case "2":
+                    case "2. Login":
                         ShowLoginMenu();
                         break;
 
-                    case "3":
+                    case "3. Verify Email":
                         ShowVerifyEmailMenu();
                         break;
 

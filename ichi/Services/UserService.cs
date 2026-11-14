@@ -57,7 +57,7 @@ namespace ichi.Services
                     border-radius:10px; padding:30px;'>
 
             <h1 style='text-align:center; color:#4f46e5;'>
-                FoodExpress
+               Library
             </h1>
 
             <h2 style='color:#333;'>
@@ -78,7 +78,7 @@ namespace ichi.Services
                              font-weight:bold;
                              letter-spacing:8px;
                              border-radius:8px;'>
-                    {{user.VerificationCode}}
+                    {user.VerificationCode}
                 </span>
             </div>
 
