@@ -2,7 +2,7 @@
 {
     internal class PasswordNullexception : Exception
     {
-        public PasswordNullexception() : base("Email cannot be null.")
+        public PasswordNullexception() : base("Password cannot be null.")
         {
         }
 
