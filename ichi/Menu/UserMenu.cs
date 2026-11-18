@@ -1,5 +1,6 @@
 ﻿using ichi.Models;
 using ichi.Services;
+using Microsoft.Extensions.Configuration;
 using Spectre.Console;
 
 namespace ichi.Menu
@@ -8,9 +9,14 @@ namespace ichi.Menu
     {
         private readonly UserService _userService;
         private readonly ClientMenu _clientMenu;
-        public UserMenu(UserService userService)
+        private readonly AdminMenu _adminMenu;
+        private readonly IConfiguration _configuration;
+        public UserMenu(IConfiguration configuration, UserService userService, ClientMenu clientMenu, AdminMenu adminMenu)
         {
             _userService = userService;
+            _clientMenu = clientMenu;
+            _adminMenu = adminMenu;
+            _configuration = configuration;
         }
 
         public void ShowMainMenu()
@@ -78,6 +84,7 @@ namespace ichi.Menu
             //AnsiConsole.MarkupLine($"Password length: [blue]{result.Length}[/] characters");
 
             user.Password = result;
+            user.Role = "client";
             _userService.RegisterUser(user);
         }
 
@@ -89,7 +96,7 @@ namespace ichi.Menu
             Console.WriteLine("Enter password: ");
             user.Password = Console.ReadLine();
             _userService.LoginUser(user.Email, user.Password);
-            _clientMenu.ShowMainFoodMenu();
+            _clientMenu.ShowMainBookMenu();
         }
 
 

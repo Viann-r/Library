@@ -26,22 +26,11 @@ namespace ichi.Repositories
                 user.IsLogged = bool.Parse(line[4]);
                 user.VerificationCode = line[5];
                 user.IsVerified = bool.Parse(line[6]);
+                user.Role = line[7];
                 users.Add(user);
             }
             return users;
         }
-
-        //public User? GetUser(string email) { 
-        //var user = GetAllUsers().FirstOrDefault(x => x.Email.Equals(email));
-        //    return user;
-        //}
-        //public void UpdateUser(User user) {
-        //    var userExists = GetAllUsers().FindIndex(u => u.Id == user.Id);
-        //    var users = GetAllUsers();
-        //    if (userExists == null) Console.WriteLine("user does not exist");
-        //    users[userExists] = user;
-        //    File.WriteAllLines(_filePath, users.Select(u => u.ToString()));
-        //}
 
 
         public void ChangeFile(List<string> usersInString)

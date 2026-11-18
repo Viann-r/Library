@@ -22,7 +22,8 @@ namespace ichi.Repositories
                 Book book = new Book();
                 book.Id = int.Parse(line[0]);
                 book.Name = line[1];
-                book.Description = line[2];
+                book.Vol = int.Parse(line[2]);
+                book.Description = line[3];
                 books.Add(book);
             }
             return books;
@@ -58,6 +59,7 @@ namespace ichi.Repositories
             Book bookToUpdate = new Book();
             bookToUpdate = books.FirstOrDefault(x => x.Id == book.Id);
             bookToUpdate.Name = book.Name;
+            bookToUpdate.Vol = book.Vol;
             bookToUpdate.Description = book.Description;
             string[] bookText = new string[books.Count];
             for (int i = 0; i < books.Count; i++)
