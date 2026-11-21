@@ -1,7 +1,7 @@
 ﻿namespace ichi.Services
 {
-    internal class IEmailService
+    internal interface IEmailService
     {
-        //void SendEmail(string toEmail, string subject, string message);
+        void SendEmail(string toEmail, string subject, string message);
     }
 }

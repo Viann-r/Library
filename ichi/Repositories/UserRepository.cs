@@ -20,6 +20,7 @@ namespace ichi.Repositories
                 var line = item.Split("|");
                 User user = new User();
                 user.Id = int.Parse(line[0]);
+                //user.Id = line[0];
                 user.Name = line[1];
                 user.Email = line[2];
                 user.Password = line[3];

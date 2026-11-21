@@ -13,43 +13,67 @@ namespace ichi.Menu
             _bookService = bookService;
             _purchaseService = orderService;
         }
-        public void Show(User user)
+        public void ShowClientMenu(User user)
         {
-            while (true)
+            string choice = "";
+            while (user.IsLogged == true && user.Role == "client" && choice != "0. Exit")
             {
-                Console.WriteLine("\n--- Client menu ---");
-                Console.WriteLine("1. Show books");
-                Console.WriteLine("2. Search book");
-                Console.WriteLine("3. Place order");
-                Console.WriteLine("4. My orders");
-                Console.WriteLine("0. Logout");
-                Console.Write("Choose: ");
-                string choice = Console.ReadLine() ?? "";
 
-                try
+                choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                .Title("1. Show books, 2. Search books, 3. Buy books, 0. Exit")
+                .AddChoices("1. Show books", "2. Search books", "3. Buy books", "0. Exit"));
+                switch (choice)
                 {
-                    if (choice == "1") ShowBooks(_bookService.GetAllBooks());
-                    else if (choice == "2") SearchBooks();
-                    else if (choice == "3") PlacePurchase(user);
-                    else if (choice == "4") ShowMyPurchases(user);
-                    else if (choice == "0") return;
-                    else Console.WriteLine("Invalid choice.");
+                    case "1. Show books":
+                        ShowBooks(_bookService.GetAllBooks());
+                        break;
+
+                    case "2. Search books":
+                        SearchBooks();
+                        break;
+
+                    case "3. Buy books":
+                        PlacePurchase(user);
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+
                 }
-                catch (Exception error)
-                {
-                    Console.WriteLine("Error: " + error.Message);
-                }
+                //Console.WriteLine("\n--- Client menu ---");
+                //Console.WriteLine("1. Show books");
+                //Console.WriteLine("2. Search book");
+                //Console.WriteLine("3. Place order");
+                //Console.WriteLine("4. My orders");
+                //Console.WriteLine("0. Logout");
+                //Console.Write("Choose: ");
+                //string choice = Console.ReadLine() ?? "";
+
+                //try
+                //{
+                //    if (choice == "1") ShowBooks(_bookService.GetAllBooks());
+                //    else if (choice == "2") SearchBooks();
+                //    else if (choice == "3") PlacePurchase(user);
+                //    else if (choice == "4") ShowMyPurchases(user);
+                //    else if (choice == "0") return;
+                //    else Console.WriteLine("Invalid choice.");
+                //}
+                //catch (Exception error)
+                //{
+                //    Console.WriteLine("Error: " + error.Message);
+                //}
             }
         }
 
-        private void SearchFoods()
+        private void SearchBooks()
         {
             Console.Write("Search text: ");
             string text = Console.ReadLine() ?? "";
             ShowBooks(_bookService.SearchBooks(text));
         }
 
-        private void PlaceOrder(User user)
+        private void PlacePurchase(User user)
         {
             List<Book> books = _bookService.GetAllBooks();
             if (books.Count == 0)
@@ -66,29 +90,29 @@ namespace ichi.Menu
                 Console.WriteLine("Book was not found.");
                 return;
             }
-
-            int quantity = ReadInt("Quantity: ");
-            Purchase purchase = _purchaseService.CreatePurchase(user, book, quantity);
+            
+            int vol = ReadInt("Vol: ");
+            Purchase purchase = _purchaseService.CreatePurchase(user, book, vol);
             //Console.WriteLine("Order created. Order id: " + order.Id);
         }
 
-        private void ShowMyPurchases(User user)
-        {
-            List<Purchase> purchases = _purchaseService.GetPurchasesForUser(user.Id);
-            foreach (Purchase order in orders)
-                Console.WriteLine($"{order.Id}. {order.BookName}, quantity: {order.Quantity}, date: {order.CreatedAt}");
+        //private void ShowMyPurchases(User user)
+        //{
+        //    List<Purchase> purchases = _purchaseService.GetPurchasesForUser(user.Id);
+        //    foreach (Purchase purchase in purchases)
+        //        Console.WriteLine($"{purchase.Id}. {purchase.BookName}, quantity: {purchase.Vol}.");
 
-            if (orders.Count == 0)
-                Console.WriteLine("You have no orders.");
-        }
+        //    if (purchases.Count == 0)
+        //        Console.WriteLine("You have no purchases.");
+        //}
 
-        private static void ShowFoods(List<Book> books)
+        private static void ShowBooks(List<Book> books)
         {
             foreach (Book book in books)
-                Console.WriteLine($"{book.Id}. {book.Name} - {book.Description}");
+                Console.WriteLine($"{book.Id}. {book.Name} | vol: {book.Vol}. Description: {book.Description}");
 
             if (books.Count == 0)
-                Console.WriteLine("No foods found.");
+                Console.WriteLine("No books found.");
         }
 
         private static int ReadInt(string message)

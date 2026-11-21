@@ -103,7 +103,7 @@ namespace ichi.Services
     </html>";
             _emailService.SendEmail(
                 user.Email,
-                "FoodExpress - ვერიფიკაციის კოდი",
+                "Library - verification code",
                 welcomeHtmlMessage
             );
 
@@ -159,6 +159,15 @@ namespace ichi.Services
 
 
         }
+
+        public List<User> GetAllUsers()
+        {
+            return _userRepository.GetAllUsers();
+        }
+
+
+
+
 
     }
 }
