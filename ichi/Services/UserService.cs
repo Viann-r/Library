@@ -1,4 +1,5 @@
 ﻿using ichi.Exeptions;
+using ichi.Menu;
 using ichi.Models;
 using ichi.Repositories;
 
@@ -8,10 +9,12 @@ namespace ichi.Services
     {
         private readonly UserRepository _userRepository;
         private readonly EmailService _emailService;
-        public UserService(UserRepository userRepository, EmailService emailService)
+        private readonly ClientMenu _clientMenu;
+        public UserService(UserRepository userRepository, EmailService emailService, ClientMenu cm)
         {
             _userRepository = userRepository;
             _emailService = emailService;
+            _clientMenu = cm;
         }
         public void RegisterUser(User user)
         {
@@ -151,7 +154,9 @@ namespace ichi.Services
                     userInStrings.Add(item.ToString());
                 }
                 _userRepository.ChangeFile(userInStrings);
-            }
+                _clientMenu.ShowClientMenu(userFromFile);
+
+			}
             else
             {
                 throw new PasswordNotMatchException();

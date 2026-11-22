@@ -20,15 +20,18 @@ namespace ichi
             PurchaseRepository purchaseRepository = new PurchaseRepository();
 
             EmailService emailService = new EmailService(configuration);
-            UserService userService = new UserService(userRepository, emailService);
+  
             BookService bookService = new BookService(bookRepository);
             PurchaseService purchaseService = new PurchaseService(purchaseRepository);
 
-            ClientMenu clientMenu = new ClientMenu(bookService, purchaseService);
-            AdminMenu adminMenu = new AdminMenu(bookService, userService, purchaseService);
-            UserMenu userMenu = new UserMenu(configuration, userService, clientMenu, adminMenu);
+			ClientMenu clientMenu = new ClientMenu(bookService, purchaseService);
 
-            userMenu.ShowMainMenu();
+			UserService userService = new UserService(userRepository, emailService, clientMenu);
+
+			AdminMenu adminMenu = new AdminMenu(bookService, userService, purchaseService);
+			UserMenu userMenu = new UserMenu(configuration, userService, clientMenu, adminMenu);
+
+			userMenu.ShowMainMenu();
         }
     }
 }
