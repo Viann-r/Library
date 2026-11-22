@@ -95,8 +95,18 @@ namespace ichi.Menu
             user.Email = Console.ReadLine();
             Console.WriteLine("Enter password: ");
             user.Password = Console.ReadLine();
-            _userService.LoginUser(user.Email, user.Password);
-            _clientMenu.ShowMainBookMenu();
+          var logedIn =   _userService.LoginUser(user.Email, user.Password);
+			
+            
+            if (logedIn.Role == "admin")
+			{
+				_adminMenu.Show(logedIn);
+			}
+			else
+			{
+				_clientMenu.ShowClientMenu(logedIn);
+			}
+			//_clientMenu.ShowMainBookMenu();
         }
 
 

@@ -26,7 +26,7 @@ namespace ichi
 
 			ClientMenu clientMenu = new ClientMenu(bookService, purchaseService);
 
-			UserService userService = new UserService(userRepository, emailService, clientMenu);
+			UserService userService = new UserService(userRepository, emailService, clientMenu );
 
 			AdminMenu adminMenu = new AdminMenu(bookService, userService, purchaseService);
 			UserMenu userMenu = new UserMenu(configuration, userService, clientMenu, adminMenu);

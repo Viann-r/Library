@@ -10,7 +10,8 @@ namespace ichi.Services
         private readonly UserRepository _userRepository;
         private readonly EmailService _emailService;
         private readonly ClientMenu _clientMenu;
-        public UserService(UserRepository userRepository, EmailService emailService, ClientMenu cm)
+        public UserService(UserRepository userRepository,
+            EmailService emailService, ClientMenu cm )
         {
             _userRepository = userRepository;
             _emailService = emailService;
@@ -128,7 +129,7 @@ namespace ichi.Services
         }
 
 
-        public void LoginUser(string email, string passwiord)
+        public User LoginUser(string email, string passwiord)
         {
             if (string.IsNullOrWhiteSpace(email))
             {
@@ -154,7 +155,9 @@ namespace ichi.Services
                     userInStrings.Add(item.ToString());
                 }
                 _userRepository.ChangeFile(userInStrings);
-                _clientMenu.ShowClientMenu(userFromFile);
+                return userFromFile;
+              
+              
 
 			}
             else
