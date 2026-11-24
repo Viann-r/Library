@@ -31,6 +31,13 @@ namespace ichi
 			AdminMenu adminMenu = new AdminMenu(bookService, userService, purchaseService);
 			UserMenu userMenu = new UserMenu(configuration, userService, clientMenu, adminMenu);
 
+            //User user = new User();
+            //private readonly UserService _userService;
+
+
+            //if (ss == "guest") {
+            
+            //}
 			userMenu.ShowMainMenu();
         }
     }

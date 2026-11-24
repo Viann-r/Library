@@ -32,11 +32,11 @@ namespace ichi.Menu
                         ShowBooks();
                         break;
 
-                    case "2. Search books":
+                    case "2. Add book":
                         AddBook();
                         break;
 
-                    case "3. Buy books":
+                    case "3. Update book":
                         UpdateBook();
                         break;
 

@@ -1,2 +1,3 @@
 1|dd|miraja2421@fulldiets.com|$2a$11$E1YCwOI7Y0VofXRxbXJbaeSjgZflVHQlkXxKkexnTk5v94teYKvZS|False|3774|True|admin
 2|ff|sotofe2450@bcough.com|$2a$11$QfgBnMsQeaH/Ulf.kuOt4OAiz0FEyrMuX1ZD0Q.5kxxdwNmCAK0uq|True|3560|True|client
+3|amanda|lanternslover@gmail.com|$2a$11$tJ6YIy4DwNXnRCCl7rh2PurGx3X.mAWfTCs8SXFT/TE1v84dqdUKW|True|6983|True|admin

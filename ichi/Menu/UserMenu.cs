@@ -19,12 +19,14 @@ namespace ichi.Menu
             _configuration = configuration;
         }
 
+        public string ss = "guest";
+
         public void ShowMainMenu()
         {
             Console.WriteLine("Welcome to the user managment system!");
 
             string choice = "";
-            while (choice != "0")
+            while (choice != "0" || ss == "guest")
             {
                 //Console.WriteLine("1. Register");
                 //Console.WriteLine("2. Login");
@@ -96,10 +98,12 @@ namespace ichi.Menu
             Console.WriteLine("Enter password: ");
             user.Password = Console.ReadLine();
           var logedIn =   _userService.LoginUser(user.Email, user.Password);
+            ss = "user";
 			
             
             if (logedIn.Role == "admin")
 			{
+                
 				_adminMenu.Show(logedIn);
 			}
 			else

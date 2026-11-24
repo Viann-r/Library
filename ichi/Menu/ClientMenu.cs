@@ -36,6 +36,10 @@ namespace ichi.Menu
                         PlacePurchase(user);
                         break;
 
+                    case "0. Exit":
+                        Console.WriteLine("Exiting the client menu.");
+                        break;
+
                     default:
                         Console.WriteLine("Invalid choice. Please try again.");
                         break;
@@ -85,14 +89,38 @@ namespace ichi.Menu
             ShowBooks(books);
             int bookId = ReadInt("Book id: ");
             Book? book = _bookService.GetBookById(bookId);
+            int vol = book.Vol;
             if (book == null)
             {
                 Console.WriteLine("Book was not found.");
                 return;
             }
-            
-            int vol = ReadInt("Vol: ");
-            Purchase purchase = _purchaseService.CreatePurchase(user, book, vol);
+            Console.WriteLine($"Do you want to buy {book.Name} (Volume: {book.Vol})?");
+
+            string choice = "";
+            while (choice != "Yes" && choice != "No")
+            {
+                choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                .Title("1. Yes, 2. No")
+                .AddChoices("1. Yes", "2. No"));
+                switch (choice)
+                {
+                    case "1. Yes":
+                        Purchase purchase = _purchaseService.CreatePurchase(user, book, vol);
+                        Console.WriteLine($"You bought {book.Name} (Volume: {vol})");
+                        return;
+                    case "2. No":
+                        Console.WriteLine("Purchase cancelled.");
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                };
+
+            }
+            //int vol = ReadInt("Vol: ");
+            //Purchase purchase = _purchaseService.CreatePurchase(user, book, vol);
+            //Console.WriteLine($"You bought {book.Name} (Volume: {vol})");
             //Console.WriteLine("Order created. Order id: " + order.Id);
         }
 
