@@ -9,8 +9,8 @@ namespace ichi
     {
         static void Main(string[] args)
         {
-			
-			IConfiguration configuration = new ConfigurationBuilder()
+
+            IConfiguration configuration = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
@@ -20,25 +20,25 @@ namespace ichi
             PurchaseRepository purchaseRepository = new PurchaseRepository();
 
             EmailService emailService = new EmailService(configuration);
-  
+
             BookService bookService = new BookService(bookRepository);
             PurchaseService purchaseService = new PurchaseService(purchaseRepository);
+            UserService userService = new UserService(userRepository, emailService);
 
-			ClientMenu clientMenu = new ClientMenu(bookService, purchaseService);
+            ClientMenu clientMenu = new ClientMenu(bookService, userService, purchaseService);
 
-			UserService userService = new UserService(userRepository, emailService, clientMenu );
 
-			AdminMenu adminMenu = new AdminMenu(bookService, userService, purchaseService);
-			UserMenu userMenu = new UserMenu(configuration, userService, clientMenu, adminMenu);
+            AdminMenu adminMenu = new AdminMenu(bookService, userService, purchaseService);
+            UserMenu userMenu = new UserMenu(configuration, userService, clientMenu, adminMenu);
 
             //User user = new User();
             //private readonly UserService _userService;
 
 
             //if (ss == "guest") {
-            
+
             //}
-			userMenu.ShowMainMenu();
+            userMenu.ShowMainMenu();
         }
     }
 }

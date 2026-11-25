@@ -7,11 +7,15 @@ namespace ichi.Menu
     internal class ClientMenu
     {
         private readonly BookService _bookService;
+        private readonly UserService _userService;
         private readonly PurchaseService _purchaseService;
-        public ClientMenu(BookService bookService, PurchaseService orderService)
+        public ClientMenu(BookService bookService, UserService userService,
+            PurchaseService purchaseService
+            )
         {
             _bookService = bookService;
-            _purchaseService = orderService;
+            _userService = userService;
+            _purchaseService = purchaseService;
         }
         public void ShowClientMenu(User user)
         {
@@ -90,6 +94,12 @@ namespace ichi.Menu
             int bookId = ReadInt("Book id: ");
             Book? book = _bookService.GetBookById(bookId);
             int vol = book.Vol;
+            int price = book.Price;
+            int instock = book.Instock;
+            int spent = user.Spent;
+            int userId = user.Id;
+
+
             if (book == null)
             {
                 Console.WriteLine("Book was not found.");
@@ -106,8 +116,20 @@ namespace ichi.Menu
                 switch (choice)
                 {
                     case "1. Yes":
-                        Purchase purchase = _purchaseService.CreatePurchase(user, book, vol);
-                        Console.WriteLine($"You bought {book.Name} (Volume: {vol})");
+                        Purchase purchase = _purchaseService.CreatePurchase(user, book, vol, price);
+                        if (instock > 0)
+                        {
+                            spent = spent + price;
+                            instock = instock - 1;
+                            if (_bookService.UpdateStock(bookId, instock) && _userService.UpdateSpent(userId, spent))
+                                Console.WriteLine($"You bought {book.Name} (Volume: {vol}) Price: {price}");
+                            else
+                                Console.WriteLine("Book was not found.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"there isn't {book.Name} vol: {book.Vol} in stock");
+                        }
                         return;
                     case "2. No":
                         Console.WriteLine("Purchase cancelled.");
@@ -115,7 +137,8 @@ namespace ichi.Menu
                     default:
                         Console.WriteLine("Invalid choice. Please try again.");
                         break;
-                };
+                }
+                ;
 
             }
             //int vol = ReadInt("Vol: ");
@@ -137,7 +160,7 @@ namespace ichi.Menu
         private static void ShowBooks(List<Book> books)
         {
             foreach (Book book in books)
-                Console.WriteLine($"{book.Id}. {book.Name} | vol: {book.Vol}. Description: {book.Description}");
+                Console.WriteLine($"{book.Id}. {book.Name} | vol: {book.Vol}. Description: {book.Description}. Price: {book.Price}, in stock: {book.Instock}");
 
             if (books.Count == 0)
                 Console.WriteLine("No books found.");

@@ -11,7 +11,7 @@ namespace ichi.Services
             _purchaseRepository = purchaseRepository;
         }
 
-        public Purchase CreatePurchase(User user, Book book, int vol
+        public Purchase CreatePurchase(User user, Book book, int vol, int price
             //, int quantity
             )
         {
@@ -25,6 +25,8 @@ namespace ichi.Services
             purchase.BookId = book.Id;
             purchase.BookName = book.Name;
             purchase.Vol = book.Vol;
+            purchase.Price = book.Price;
+            //purchase.Vol = book.Vol;
 
             _purchaseRepository.SavePurchase(purchase);
             return purchase;

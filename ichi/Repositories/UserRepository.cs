@@ -34,6 +34,22 @@ namespace ichi.Repositories
         }
 
 
+        public void UpdateSpent(User user)
+        {
+            var users = GetAllUsers();
+            User usersspent = new User();
+            usersspent = users.FirstOrDefault(x => x.Id == user.Id);
+            usersspent.Spent = user.Spent;
+            string[] spentText = new string[users.Count];
+            for (int i = 0; i < users.Count; i++)
+            {
+                spentText[i] = users[i].ToString();
+            }
+            File.WriteAllText(_filePath, string.Empty);
+            File.AppendAllLines(_filePath, spentText);
+        }
+
+
         public void ChangeFile(List<string> usersInString)
         {
             File.WriteAllText(_filePath, "");
@@ -76,6 +92,12 @@ namespace ichi.Repositories
             }
         }
 
-
+        public User GetUserById(int id)
+        {
+            User user = new User();
+            var users = GetAllUsers();
+            user = users.FirstOrDefault(x => x.Id == id);
+            return user;
+        }
     }
 }

@@ -56,35 +56,6 @@ namespace ichi.Menu
             }
             ;
         }
-                //while (true)
-                //{
-                //    Console.WriteLine("\n--- Admin menu ---");
-                //    Console.WriteLine("1. Show books");
-                //    Console.WriteLine("2. Add book");
-                //    Console.WriteLine("3. Update book");
-                //    Console.WriteLine("4. Delete book");
-                //    Console.WriteLine("5. Add admin");
-                //    //Console.WriteLine("5. Show all orders");
-                //    Console.WriteLine("0. Logout");
-                //    Console.Write("Choose: ");
-                //    string choice = Console.ReadLine() ?? "";
-
-                //    try
-                //    {
-                //        if (choice == "1") ShowBooks();
-                //        else if (choice == "2") AddBook();
-                //        else if (choice == "3") UpdateBook();
-                //        else if (choice == "4") DeleteBook();
-                //        //else if (choice == "5") ShowOrders();
-                //        else if (choice == "0") return;
-                //        else Console.WriteLine("Invalid choice.");
-                //    }
-                //    catch (Exception error)
-                //    {
-                //        Console.WriteLine("Error: " + error.Message);
-                //    }
-                //}
-            //}
 
 
 
@@ -107,15 +78,15 @@ namespace ichi.Menu
                         choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("1. Yes 2. No")
                 .AddChoices("1. Yes", "2. No"));
-                        //choice = Console.ReadLine();
                         switch (choice)
                         {
                             case "1. Yes":
                                 user.Role = "admin";
+
                                 break;
 
                             case "2. No":
-                                
+
                                 break;
 
                             default:
@@ -126,7 +97,7 @@ namespace ichi.Menu
                     }
                 }
             }
-            
+
         }
 
 
@@ -148,8 +119,11 @@ namespace ichi.Menu
             int vol = int.Parse(Console.ReadLine() ?? "0");
             Console.Write("Description: ");
             string description = Console.ReadLine() ?? "";
-
-            _bookService.AddBook(name, vol, description);
+            Console.Write("Book price: ");
+            int price = int.Parse(Console.ReadLine() ?? "0");
+            Console.Write("How many books in stock: ");
+            int instock = int.Parse(Console.ReadLine() ?? "0");
+            _bookService.AddBook(name, vol, description, price, instock);
             Console.WriteLine("Book added.");
         }
 
@@ -161,8 +135,12 @@ namespace ichi.Menu
             int vol = ReadInt("Book vol: ");
             Console.Write("New description: ");
             string description = Console.ReadLine() ?? "";
+            int price = ReadInt("Book price: ");
+            int instock = ReadInt("Book instock: ");
 
-            if (_bookService.UpdateBook(id, name, vol, description))
+
+
+            if (_bookService.UpdateBook(id, name, vol, description, price, instock))
                 Console.WriteLine("Book updated.");
             else
                 Console.WriteLine("Book was not found.");
@@ -193,6 +171,15 @@ namespace ichi.Menu
             if (int.TryParse(Console.ReadLine(), out int number))
                 return number;
             throw new ArgumentException("Please enter a number.");
+        }
+        public string BestPurchases()
+        {
+            List<User> users = new List<User>();
+            foreach (var item in users)
+            {
+
+            }
+            return users;
         }
     }
 }

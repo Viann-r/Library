@@ -24,6 +24,9 @@ namespace ichi.Repositories
                 book.Name = line[1];
                 book.Vol = int.Parse(line[2]);
                 book.Description = line[3];
+                book.Price = int.Parse(line[4]);
+                book.Instock = int.Parse(line[5]);
+
                 books.Add(book);
             }
             return books;
@@ -61,6 +64,23 @@ namespace ichi.Repositories
             bookToUpdate.Name = book.Name;
             bookToUpdate.Vol = book.Vol;
             bookToUpdate.Description = book.Description;
+            bookToUpdate.Price = book.Price;
+            bookToUpdate.Instock = book.Instock;
+            string[] bookText = new string[books.Count];
+            for (int i = 0; i < books.Count; i++)
+            {
+                bookText[i] = books[i].ToString();
+            }
+            File.WriteAllText(_filePath, string.Empty);
+            File.AppendAllLines(_filePath, bookText);
+        }
+
+        public void UpdateStock(Book book)
+        {
+            var books = GetAllBooks();
+            Book bookToUpdate = new Book();
+            bookToUpdate = books.FirstOrDefault(x => x.Id == book.Id);
+            bookToUpdate.Instock = book.Instock;
             string[] bookText = new string[books.Count];
             for (int i = 0; i < books.Count; i++)
             {

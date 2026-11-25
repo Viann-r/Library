@@ -29,10 +29,10 @@ namespace ichi.Models
         public string VerificationCode { get; set; }
         public bool IsVerified { get; set; } = false;
         public string Role { get; set; }
-
+        public int Spent { get; set; }
         public override string? ToString()
         {
-            return $"{Id}|{Name}|{Email}|{Password}|{IsLogged}|{VerificationCode}|{IsVerified}|{Role}";
+            return $"{Id}|{Name}|{Email}|{Password}|{IsLogged}|{VerificationCode}|{IsVerified}|{Role}|{Spent}";
         }
     }
 }

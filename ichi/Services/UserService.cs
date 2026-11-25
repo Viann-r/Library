@@ -11,11 +11,10 @@ namespace ichi.Services
         private readonly EmailService _emailService;
         private readonly ClientMenu _clientMenu;
         public UserService(UserRepository userRepository,
-            EmailService emailService, ClientMenu cm )
+            EmailService emailService)
         {
             _userRepository = userRepository;
             _emailService = emailService;
-            _clientMenu = cm;
         }
         public void RegisterUser(User user)
         {
@@ -156,10 +155,10 @@ namespace ichi.Services
                 }
                 _userRepository.ChangeFile(userInStrings);
                 return userFromFile;
-              
-              
 
-			}
+
+
+            }
             else
             {
                 throw new PasswordNotMatchException();
@@ -172,8 +171,18 @@ namespace ichi.Services
         {
             return _userRepository.GetAllUsers();
         }
-
-
+        public User? GetUserById(int id)
+        {
+            return _userRepository.GetUserById(id);
+        }
+        public bool UpdateSpent(int id, int spent)
+        {
+            //CheckBookData(instock);
+            User? user = GetUserById(id);
+            user.Spent = spent;
+            _userRepository.UpdateSpent(user);
+            return true;
+        }
 
 
 

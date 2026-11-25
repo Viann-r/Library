@@ -87,6 +87,7 @@ namespace ichi.Menu
 
             user.Password = result;
             user.Role = "client";
+            user.Spent = 0;
             _userService.RegisterUser(user);
         }
 
@@ -97,20 +98,20 @@ namespace ichi.Menu
             user.Email = Console.ReadLine();
             Console.WriteLine("Enter password: ");
             user.Password = Console.ReadLine();
-          var logedIn =   _userService.LoginUser(user.Email, user.Password);
+            var logedIn = _userService.LoginUser(user.Email, user.Password);
             ss = "user";
-			
-            
+
+
             if (logedIn.Role == "admin")
-			{
-                
-				_adminMenu.Show(logedIn);
-			}
-			else
-			{
-				_clientMenu.ShowClientMenu(logedIn);
-			}
-			//_clientMenu.ShowMainBookMenu();
+            {
+
+                _adminMenu.Show(logedIn);
+            }
+            else
+            {
+                _clientMenu.ShowClientMenu(logedIn);
+            }
+            //_clientMenu.ShowMainBookMenu();
         }
 
 
