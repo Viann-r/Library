@@ -28,6 +28,7 @@ namespace ichi.Repositories
                 user.VerificationCode = line[5];
                 user.IsVerified = bool.Parse(line[6]);
                 user.Role = line[7];
+                user.Spent = int.Parse(line[8]);
                 users.Add(user);
             }
             return users;

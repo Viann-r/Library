@@ -176,7 +176,7 @@ namespace ichi.Menu
                 return number;
             throw new ArgumentException("Please enter a number.");
         }
-        public static string BestPurchases()
+        public string BestPurchases()
         {
             var users = _userService.GetAllUsers();
             List<User> topusers = new List<User>();
