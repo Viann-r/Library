@@ -1,5 +1,5 @@
 1|dd|miraja2421@fulldiets.com|$2a$11$E1YCwOI7Y0VofXRxbXJbaeSjgZflVHQlkXxKkexnTk5v94teYKvZS|False|3774|True|client|0
 2|ff|sotofe2450@bcough.com|$2a$11$QfgBnMsQeaH/Ulf.kuOt4OAiz0FEyrMuX1ZD0Q.5kxxdwNmCAK0uq|True|3560|True|client|0
-3|aa|livayeg908@kranove.com|$2a$11$RS8tDgK6L8Ah/qye/BqBSeoysTvz87WgOpB.guvZTiAoJME0DQLFq|True|9454|True|admin|0
+3|aa|livayeg908@kranove.com|$2a$11$RS8tDgK6L8Ah/qye/BqBSeoysTvz87WgOpB.guvZTiAoJME0DQLFq|True|9454|True|client|0
 4|bb|nagaxo3852@kranove.com|$2a$11$MVOwcJQKJj/p/ETj0zmyQumbDLlRfXM/cpErxRBVCpUMp9UxmR3TC|True|1805|True|client|0
-5|aab|kbxfjkttrnoksryisp@onldm.net|$2a$11$wzGOMo6MOAlcLrEh.ZfYl.L4.9LtljOc0YX5Yv5Ln.V9voHvKrSFy|True|1234|True|client|0
+5|aab|kbxfjkttrnoksryisp@onldm.net|$2a$11$wzGOMo6MOAlcLrEh.ZfYl.L4.9LtljOc0YX5Yv5Ln.V9voHvKrSFy|True|1234|True|admin|0

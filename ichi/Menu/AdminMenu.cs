@@ -24,8 +24,8 @@ namespace ichi.Menu
             {
 
                 choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("1. Show books, 2. Add book, 3. Update book, 4. Delete book, 5. Add admin, 0. Exit")
-                .AddChoices("1. Show books", "2. Add book", "3. Update book", "4. Delete book", "5. Add admin", "0. Exit"));
+                .Title("1. Show books, 2. Add book, 3. Update book, 4. Delete book, 5. Add admin, 6. Shop top 3 clients 0. Exit")
+                .AddChoices("1. Show books", "2. Add book", "3. Update book", "4. Delete book", "5. Add admin", "6. Shop top 3 clients", "0. Exit"));
                 switch (choice)
                 {
                     case "1. Show books":
@@ -46,6 +46,10 @@ namespace ichi.Menu
 
                     case "5. Add admin":
                         AddAdmin();
+                        break;
+
+                    case "6. Shop top 3 clients":
+                        BestPurchases();
                         break;
 
                     default:
@@ -172,14 +176,42 @@ namespace ichi.Menu
                 return number;
             throw new ArgumentException("Please enter a number.");
         }
-        public string BestPurchases()
+        public static string BestPurchases()
         {
-            List<User> users = new List<User>();
-            foreach (var item in users)
+            var users = _userService.GetAllUsers();
+            List<User> topusers = new List<User>();
+            int max = 0;
+            bool isMax = false;
+            bool maxStop = false;
+            for (int i = 0; i < users.Count; i++)
             {
-
+                if (topusers.Count == 3)
+                {
+                    break;
+                }
+                for (int j = i + 1; j < users.Count; j++)
+                {
+                    if (users[i].Spent > users[j].Spent)
+                    {
+                        max = users[i].Spent;
+                        isMax = true;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    if (isMax && j == 10)
+                    {
+                        users.Remove(users[i]);
+                        topusers.Add(users[i]);
+                        maxStop = true;
+                    }
+                }
+    ;
+                
             }
-            return users;
+;
+            return $"The best purchases are: {topusers[0].Name}, {topusers[1].Name}, {topusers[2].Name}";
         }
     }
 }
